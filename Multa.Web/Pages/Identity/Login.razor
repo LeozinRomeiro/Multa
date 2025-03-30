@@ -1,19 +1,49 @@
 ﻿@page "/login"
+@using System.ComponentModel.DataAnnotations
 @layout LoginLayout
 
 <PageTitle>Entrar</PageTitle>
 
-<h3>login</h3>
-
 <MudGrid Justify="Justify.Center">
-    <MudItem>
-        1
-    </MudItem>
-    <MudItem>
-        1
+    <MudItem xs="12" sm="12" md="8" lg="6" xl="6" xxl="6">
+        @* <MudPaper Class="mud-width-full"> *@
+        <MudPaper Class="pa-8"> 
+            Informe suas credenciais de acesso
+            <div class="d-flex justify-center">
+                <img src="imgs/multa-por-excesso-de-velocidade.png" alt="logo principal" width="250"/>
+            </div>
+            <MudForm @ref="_mudForm">
+                <MudTextField 
+                    T="string" 
+                    Label="E-mail" 
+                    InputType="InputType.Email" 
+                    Required="true" 
+                    RequiredError="Informe o E-mail" 
+                    Validation="@(new EmailAddressAttribute{ ErrorMessage = "E-mail invalido" })">   
+                </MudTextField>
+                <MudTextField
+                    T = "string" 
+                    Label="Senha" 
+                    InputType="InputType.Password" 
+                    Required="true" 
+                    RequiredError="Senha invalida">
+
+                </MudTextField>
+            </MudForm>
+
+            <div class="d-flex mt-8">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary">
+                    Entrar
+                </MudButton>
+                <MudSpacer></MudSpacer>
+                <MudButton Href="/esqueci" Variant="Variant.Filled" Color="Color.Dark">
+                    Esqueci a senha
+                </MudButton>
+            </div>
+        </MudPaper>
     </MudItem>
 </MudGrid>
 
 @code {
-
+    MudForm _mudForm = new();
 }

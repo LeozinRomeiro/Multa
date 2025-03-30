@@ -1,6 +1,6 @@
 ﻿@inherits LayoutComponentBase
 
-<MudThemeProvider/>
+<MudThemeProvider Theme="theme"/>
 <MudSnackbarProvider/>
 
 <MudLayout>
@@ -10,3 +10,16 @@
         </MudContainer>
     </MudMainContent>
 </MudLayout>
+
+@code{
+    private MudTheme theme = new()
+    {
+        Typography = new Typography()
+        {
+            Default = new DefaultTypography()
+            {
+                FontFamily = ["Ubuntu", "sans - serif"],
+            }
+        }
+    };
+}
