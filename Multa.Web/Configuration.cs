@@ -16,21 +16,36 @@ namespace Multa.Web
             },
             PaletteLight = new PaletteLight()
             {
-                Primary = "FFD369",
-                Secondary = Colors.Red.Accent4,
+                //Primary = "FFD369",
+                Primary = new MudColor("#fff100"),
+                PrimaryContrastText = new MudColor("#000000"),
+                Secondary = Colors.LightGreen.Darken3,
                 Background = Colors.Gray.Lighten4,
-                AppbarBackground = new MudColor("#1EFA2D"),
+                AppbarBackground = new MudColor("#fff100"),
                 AppbarText = Colors.Shades.Black,
                 TextPrimary = Colors.Shades.Black,
-                DrawerText = Colors.Shades.White,
-                DrawerBackground = Colors.Green.Darken4
+                DrawerText = Colors.Shades.Black,
+                DrawerBackground = "#ecce44"
             },
+            //PaletteLight = new PaletteLight()
+            //{
+            //    //Primary = "FFD369",
+            //    Primary = new MudColor("#FFDD00"),
+            //    PrimaryContrastText = new MudColor("#000000"),
+            //    Secondary = Colors.LightGreen.Darken3,
+            //    Background = Colors.Gray.Lighten4,
+            //    AppbarBackground = new MudColor("#FFDD00"),
+            //    AppbarText = Colors.Shades.Black,
+            //    TextPrimary = Colors.Shades.Black,
+            //    DrawerText = Colors.Shades.Black,
+            //    DrawerBackground = "#36827F"
+            //},
             PaletteDark = new PaletteDark
             {
-                Primary = Colors.LightGreen.Accent3,
+                Primary = "#ffff7c",
                 Secondary = Colors.LightGreen.Darken3,
                 // Background = Colors.LightGreen.Darken4,
-                AppbarBackground = Colors.LightGreen.Accent3,
+                AppbarBackground = "#ffff7c",
                 AppbarText = Colors.Shades.Black,
                 PrimaryContrastText = new MudColor("#000000")
             }
