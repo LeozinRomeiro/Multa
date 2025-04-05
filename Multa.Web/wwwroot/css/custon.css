@@ -1,0 +1,14 @@
+﻿/*
+.custom-nav-link {
+    font-size: 1.25rem;
+}
+
+.custom-nav-link .mud-icon {
+    font-size: 1.5rem;
+}
+*/
+
+.linha-selecionada {
+    background-color: #E3F2FD !important; /* Azul claro */
+    color: #0D47A1; /* Texto azul escuro */
+}

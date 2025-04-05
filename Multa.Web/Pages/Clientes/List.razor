@@ -1,0 +1,68 @@
+﻿@using Multa.Core.Models;
+
+@page "/clientes"
+@inherits ListClientesPage
+
+<MudText Typo="Typo.h3">Clientes</MudText>
+<div class="d-flex justify-end">
+    <MudButton Variant="Variant.Filled"
+    Color="Color.Primary"
+    StartIcon="@Icons.Material.TwoTone.Add"
+    Href="/clientes/adicionar">
+        NOVO CLIENTE
+    </MudButton>
+</div>
+
+<MudDataGrid
+T="Cliente"
+Class="mt-4"
+Items="@Clientes"
+QuickFilter="Filter"
+Filterable="false"
+Hideable="true"
+MultiSelection="false"
+RowClick="OnRowClick"
+RowStyleFunc="AlterColorSelect"
+SelectedItem="ClienteSelected"
+>
+    <ToolBarContent>
+        @* <MudText Typo="Typo.h6">Clientes</MudText> *@
+        @if(ClienteSelected is not null)
+        {
+            <MudButton 
+            Color="Color.Primary"
+            OnClick="() => OnEditing(ClienteSelected.Id)">
+                <MudIcon Icon="@Icons.Material.Filled.Edit" ></MudIcon>
+                <MudText Class="ml-2">Editar</MudText>
+            </MudButton>
+
+            <MudButton 
+            Color="Color.Error"
+            OnClick="() => OnDeleteButtonClickedAsync(ClienteSelected.Id, ClienteSelected.Nome)">
+                <MudIcon Icon="@Icons.Material.Filled.Delete"
+                aria-label="Excluir"></MudIcon>
+                <MudText Class="ml-2">Deletar</MudText>
+            </MudButton>
+        }
+        else
+        {
+            <MudText>Selecione um cliente para deletar ou edita-lo</MudText>
+        }
+        <MudSpacer/>
+        <MudTextField
+            AdornmentColor="Color.Dark"
+            @bind-Value="SearchTerm"
+            Placeholder="Filtrar..."
+            Adornment="Adornment.Start"
+            AdornmentIcon="@Icons.Material.Filled.Search"
+            Immediate="true"
+            IconSize="Size.Medium"
+            Class="mt-0">
+        </MudTextField>
+    </ToolBarContent>
+    <Columns >
+        <PropertyColumn Property="x => x.Id" Title="#"/>
+        <PropertyColumn Property="x => x.Nome" Title="Nome" />
+        <PropertyColumn Property="x => x.Telefone" Title="Telefone" />
+    </Columns>
+</MudDataGrid>

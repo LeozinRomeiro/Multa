@@ -1,0 +1,65 @@
+﻿@page "/clientes/editar/{id}"
+@inherits EditClientePage
+
+<MudText Typo="Typo.h3">Editar Cliente</MudText>
+
+@if (IsBusy)
+{
+    <MudPaper Class="pa-8 mt-4">
+        <MudSkeleton Height="55px" />
+        <MudSkeleton Height="55px" />
+        <MudSkeleton Height="55px" />
+        <MudSkeleton Height="55px" />
+        <MudSkeleton Height="55px" />
+        <MudSkeleton Height="55px" />
+        <MudSkeleton Height="55px" />
+    </MudPaper>
+}
+else
+{
+    <MudPaper Class="pa-8 mt-4">
+        <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+            <DataAnnotationsValidator />
+
+            <div class="d-flex flex-wrap" style="gap: 1rem;">
+
+                <MudTextField Label="Nome" Style="min-width: 250px;"
+                              HelperText="Campo obrigatório"
+                              @bind-Value="InputModel.Nome"
+                              For="@(() => InputModel.Nome)" />
+
+                <MudTextField Label="CPF"
+                              HelperText="Somente números"
+                              @bind-Value="InputModel.CPF"
+                              For="@(() => InputModel.CPF)" />
+
+                <MudTextField Label="CNH"
+                              @bind-Value="InputModel.CNH"
+                              For="@(() => InputModel.CNH)" />
+
+                <MudDatePicker Label="Data de Nascimento"
+                               @bind-Date="InputModel.DataNascimento"
+                               For="@(() => InputModel.DataNascimento)" />
+
+                <MudTextField Label="Endereço"
+                              @bind-Value="InputModel.Endereco"
+                              For="@(() => InputModel.Endereco)" />
+
+                <MudTextField Label="Telefone"
+                              @bind-Value="InputModel.Telefone"
+                              For="@(() => InputModel.Telefone)" />
+
+                <MudTextField Label="E-mail"
+                              @bind-Value="InputModel.Email"
+                              For="@(() => InputModel.Email)" />
+            </div>
+
+
+            <MudButton Class="mt-5" ButtonType="ButtonType.Submit"
+                       Variant="Variant.Filled"
+                       Color="Color.Primary">
+                Salvar
+            </MudButton>
+        </EditForm>
+    </MudPaper>
+}

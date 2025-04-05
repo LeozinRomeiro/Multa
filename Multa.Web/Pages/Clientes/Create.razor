@@ -1,0 +1,47 @@
+﻿@page "/clientes/adicionar"
+@inherits CreateClientePage
+
+<MudText Typo="Typo.h3">Novo Cliente</MudText>
+
+<MudPaper Class="pa-8 mt-4">
+    <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+        <DataAnnotationsValidator />
+
+        <MudTextField Label="Nome"
+                      HelperText="Campo obrigatório"
+                      @bind-Value="InputModel.Nome"
+                      For="@(() => InputModel.Nome)" />
+
+         <MudTextField Label="CPF"
+                      HelperText="Somente números"
+                      @bind-Value="InputModel.CPF"
+                      For="@(() => InputModel.CPF)" />
+
+        <MudTextField Label="CNH"
+                      @bind-Value="InputModel.CNH"
+                      For="@(() => InputModel.CNH)" />
+
+        <MudDatePicker Label="Data de Nascimento"
+                       @bind-date="InputModel.DataNascimento"
+                       For="@(() => InputModel.DataNascimento)" />
+
+        <MudTextField Label="Endereço"
+                      @bind-Value="InputModel.Endereco"
+                      For="@(() => InputModel.Endereco)" />
+
+        <MudTextField Label="Telefone"
+                      @bind-Value="InputModel.Telefone"
+                      For="@(() => InputModel.Telefone)" />
+
+        <MudTextField Label="Email"
+                      @bind-Value="InputModel.Email"
+                      For="@(() => InputModel.Email)" /> 
+
+        <MudButton ButtonType="ButtonType.Submit"
+                   Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   Disabled="IsBusy">
+            Salvar
+        </MudButton>
+    </EditForm>
+</MudPaper>

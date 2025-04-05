@@ -2,11 +2,14 @@
     <img src="imgs/multa-por-excesso-de-velocidade-black.png" alt="Multa - Controle de inflações de transito" width="200" />
 </div>
 
-<MudNavMenu>
-    <MudNavLink Href="/" Match="NavLinkMatch.All">Dashboard</MudNavLink>
-    <MudNavLink Href="/lancamentos/historico">Histórico</MudNavLink>
-    <MudNavLink Href="/categorias">Categorias</MudNavLink>
-    <MudNavLink Href="/categorias/premium">Categorias</MudNavLink>
-    <MudNavLink Href="/premium">Premium</MudNavLink>
-    <MudNavLink Href="/sair">Sair</MudNavLink>
+<MudNavMenu Class="custom-nav-link">
+    <MudNavLink Icon="@Icons.Material.Filled.Home" Href="/" Match="NavLinkMatch.All">Dashboard</MudNavLink>
+    <MudNavLink Icon="@Icons.Material.Filled.People" Href="/clientes">Clientes</MudNavLink>
+    <MudNavLink Icon="@Icons.Material.Filled.ExitToApp" Href="/sair">Sair</MudNavLink>
 </MudNavMenu>
+
+@* <MudNavMenu Style="font-size: 1.50rem">
+    <MudNavLink Icon="@Icons.Material.Filled.Home" Href="/" Match="NavLinkMatch.All">Dashboard</MudNavLink>
+    <MudNavLink Icon="@Icons.Material.Filled.People" Href="/clientes">Clientes</MudNavLink>
+    <MudNavLink Icon="@Icons.Material.Filled.ExitToApp" Href="/sair">Sair</MudNavLink>
+</MudNavMenu> *@

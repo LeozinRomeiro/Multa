@@ -20,7 +20,7 @@ namespace Multa.Core.Requests.Cliente
         public string CNH { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Data de nascimento é obrigatória")]
-        public DateTime DataNascimento { get; set; }
+        public DateTime? DataNascimento { get; set; }
 
         [Required(ErrorMessage = "Endereço é obrigatório")]
         [MaxLength(200, ErrorMessage = "Endereço deve conter até 200 caracteres")]
