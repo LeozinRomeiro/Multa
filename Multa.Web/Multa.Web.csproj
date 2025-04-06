@@ -6,7 +6,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
 	<BlazorWebAssemblyLoadAllGlobalizationData>True</BlazorWebAssemblyLoadAllGlobalizationData>
-	<StaticWebAssetBasePath>Multa</StaticWebAssetBasePath>
   </PropertyGroup>
 
   <ItemGroup>
