@@ -39,8 +39,11 @@ jobs:
       - name: Build
         run: dotnet build -c Release --no-restore
 
+      - name: Ver arquivos clonados
+        run: ls -R
+
       - name: Publish .NET
-        run: dotnet publish Multa.Web.csproj -c:Release -o docs --nologo
+        run: dotnet publish Multa.Web/Multa.Web.csproj -c:Release -o docs --nologo
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
