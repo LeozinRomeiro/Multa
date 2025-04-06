@@ -4,6 +4,7 @@ using MudBlazor.Services;
 using Multa.Core.Handlers;
 using Multa.Web;
 using Multa.Web.Handlers;
+using System.Globalization;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -20,5 +21,10 @@ builder.Services
     ;
 
 builder.Services.AddTransient<IClienteHandler, ClienteHandler>();
+builder.Services.AddTransient<IMultaHandler, MultaHandler>();
+
+builder.Services.AddLocalization();
+CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pt-BR");
+CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("pt-BR");
 
 await builder.Build().RunAsync();

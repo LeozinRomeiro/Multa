@@ -7,35 +7,38 @@
     <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
         <DataAnnotationsValidator />
 
-        <MudTextField Label="Nome"
-                      HelperText="Campo obrigatório"
-                      @bind-Value="InputModel.Nome"
-                      For="@(() => InputModel.Nome)" />
+        <div class="d-flex flex-wrap" style="gap: 1rem;">
 
-         <MudTextField Label="CPF"
-                      HelperText="Somente números"
-                      @bind-Value="InputModel.CPF"
-                      For="@(() => InputModel.CPF)" />
+            <MudTextField Label="Nome" Style="min-width: 600px;"
+                          HelperText="Campo obrigatório"
+                          @bind-Value="InputModel.Nome"
+                          For="@(() => InputModel.Nome)" />
 
-        <MudTextField Label="CNH"
-                      @bind-Value="InputModel.CNH"
-                      For="@(() => InputModel.CNH)" />
+            <MudTextField Label="CPF" Style="min-width: 200px;"
+                          HelperText="Somente números"
+                          @bind-Value="InputModel.CPF"
+                          For="@(() => InputModel.CPF)" />
 
-        <MudDatePicker Label="Data de Nascimento"
-                       @bind-date="InputModel.DataNascimento"
-                       For="@(() => InputModel.DataNascimento)" />
+            <MudTextField Label="CNH" Style="min-width: 200px;"
+                          @bind-Value="InputModel.CNH"
+                          For="@(() => InputModel.CNH)" />
 
-        <MudTextField Label="Endereço"
-                      @bind-Value="InputModel.Endereco"
-                      For="@(() => InputModel.Endereco)" />
+            <MudDatePicker Label="Data de Nascimento" Style="min-width: 50px; max-width: 200px;"
+                           @bind-Date="InputModel.DataNascimento"
+                           For="@(() => InputModel.DataNascimento)" />
 
-        <MudTextField Label="Telefone"
-                      @bind-Value="InputModel.Telefone"
-                      For="@(() => InputModel.Telefone)" />
+            <MudTextField Label="Telefone" Style="min-width: 200px;"
+                          @bind-Value="InputModel.Telefone"
+                          For="@(() => InputModel.Telefone)" />
 
-        <MudTextField Label="Email"
-                      @bind-Value="InputModel.Email"
-                      For="@(() => InputModel.Email)" /> 
+            <MudTextField Label="E-mail" Style="min-width: 250px;"
+                          @bind-Value="InputModel.Email"
+                          For="@(() => InputModel.Email)" />
+
+            <MudTextField Label="Endereço" Style="min-width: 500px;"
+                          @bind-Value="InputModel.Endereco"
+                          For="@(() => InputModel.Endereco)" />
+        </div>
 
         <MudButton ButtonType="ButtonType.Submit"
                    Variant="Variant.Filled"

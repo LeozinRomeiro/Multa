@@ -23,35 +23,35 @@ else
 
             <div class="d-flex flex-wrap" style="gap: 1rem;">
 
-                <MudTextField Label="Nome" Style="min-width: 250px;"
+                <MudTextField Label="Nome" Style="min-width: 600px;"
                               HelperText="Campo obrigatório"
                               @bind-Value="InputModel.Nome"
                               For="@(() => InputModel.Nome)" />
 
-                <MudTextField Label="CPF"
+                <MudTextField Label="CPF" Style="min-width: 200px;"
                               HelperText="Somente números"
                               @bind-Value="InputModel.CPF"
                               For="@(() => InputModel.CPF)" />
 
-                <MudTextField Label="CNH"
+                <MudTextField Label="CNH" Style="min-width: 200px;"
                               @bind-Value="InputModel.CNH"
                               For="@(() => InputModel.CNH)" />
 
-                <MudDatePicker Label="Data de Nascimento"
+                <MudDatePicker Label="Data de Nascimento" Style="min-width: 50px; max-width: 200px;"
                                @bind-Date="InputModel.DataNascimento"
                                For="@(() => InputModel.DataNascimento)" />
 
-                <MudTextField Label="Endereço"
-                              @bind-Value="InputModel.Endereco"
-                              For="@(() => InputModel.Endereco)" />
-
-                <MudTextField Label="Telefone"
+                <MudTextField Label="Telefone" Style="min-width: 200px;"
                               @bind-Value="InputModel.Telefone"
                               For="@(() => InputModel.Telefone)" />
 
-                <MudTextField Label="E-mail"
+                <MudTextField Label="E-mail" Style="min-width: 250px;"
                               @bind-Value="InputModel.Email"
                               For="@(() => InputModel.Email)" />
+
+                <MudTextField Label="Endereço" Style="min-width: 500px;"
+                              @bind-Value="InputModel.Endereco"
+                              For="@(() => InputModel.Endereco)" />
             </div>
 
 

@@ -12,3 +12,7 @@
     background-color: #E3F2FD !important; /* Azul claro */
     color: #0D47A1; /* Texto azul escuro */
 }
+
+tr[style*="background-color: var(--mud-palette-primary)"] td {
+    color: var(--mud-palette-primary-text) !important;
+}

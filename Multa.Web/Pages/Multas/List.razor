@@ -1,0 +1,63 @@
+﻿@page "/multas"
+@inherits ListMultasPage
+
+<MudText Typo="Typo.h3">Multas</MudText>
+
+<div class="d-flex justify-end">
+    <MudButton Variant="Variant.Filled"
+               Color="Color.Primary"
+               StartIcon="@Icons.Material.Filled.Add"
+               Href="/multas/adicionar">
+        NOVA MULTA
+    </MudButton>
+</div>
+
+<MudDataGrid T="Core.Models.Multa"
+             Class="mt-4"
+             Items="@Multas"
+             QuickFilter="Filter"
+             Filterable="false"
+             Hideable="true"
+             MultiSelection="false"
+             RowClick="OnRowClick"
+             RowStyleFunc="AlterColorSelect"
+             SelectedItem="MultaSelected">
+
+    <ToolBarContent>
+        @if (MultaSelected is not null)
+        {
+            <MudButton Color="Color.Secondary" OnClick="() => OnEditing(MultaSelected.Id)">
+                <MudIcon Icon="@Icons.Material.Filled.Edit" />
+                <MudText Class="ml-2">Editar</MudText>
+            </MudButton>
+
+            <MudButton Color="Color.Error" OnClick="() => OnDeleteButtonClickedAsync(MultaSelected.Id, MultaSelected.AutoInfracao)">
+                <MudIcon Icon="@Icons.Material.Filled.Delete" />
+                <MudText Class="ml-2">Deletar</MudText>
+            </MudButton>
+        }
+        else
+        {
+            <MudText>Selecione uma multa para editar ou excluir</MudText>
+        }
+
+        <MudSpacer />
+        <MudTextField @bind-Value="SearchTerm"
+                      Placeholder="Filtrar..."
+                      Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Search"
+                      Class="mt-0"
+                      Immediate="true" />
+    </ToolBarContent>
+
+    <Columns>
+        @* <PropertyColumn Property="x => x.Id" Title="#" /> *@
+        <PropertyColumn Property="x => x.AutoInfracao" Title="Auto de Infração" />
+        <PropertyColumn Property="x => x.PlacaVeiculo" Title="Placa" />
+        <PropertyColumn Property="x => x.CodigoInfracao" Title="Código" />
+        <PropertyColumn Property="x => x.DescricaoInfracao" Title="Descrição" />
+        <PropertyColumn Property="x => x.ValorMulta" Title="Valor (R$)" />
+        <PropertyColumn Property="x => x.DataInfracao" Title="Data" />
+        <PropertyColumn Property="x => x.Cliente.Nome" Title="Cliente" />
+    </Columns>
+</MudDataGrid>

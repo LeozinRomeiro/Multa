@@ -30,7 +30,7 @@ SelectedItem="ClienteSelected"
         @if(ClienteSelected is not null)
         {
             <MudButton 
-            Color="Color.Primary"
+            Color="Color.Secondary"
             OnClick="() => OnEditing(ClienteSelected.Id)">
                 <MudIcon Icon="@Icons.Material.Filled.Edit" ></MudIcon>
                 <MudText Class="ml-2">Editar</MudText>
@@ -61,8 +61,11 @@ SelectedItem="ClienteSelected"
         </MudTextField>
     </ToolBarContent>
     <Columns >
-        <PropertyColumn Property="x => x.Id" Title="#"/>
+        @* <PropertyColumn Property="x => x.Id" Title="#"/> *@
         <PropertyColumn Property="x => x.Nome" Title="Nome" />
         <PropertyColumn Property="x => x.Telefone" Title="Telefone" />
+        <PropertyColumn Property="x => x.CPF" Title="CPF" />
+        <PropertyColumn Property="x => x.CNH" Title="CNH" />
+        <PropertyColumn Property="x => x.DataNascimento" Title="Data de Nascimento" />
     </Columns>
 </MudDataGrid>

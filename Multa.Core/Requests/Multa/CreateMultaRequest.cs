@@ -28,7 +28,7 @@ namespace Multa.Core.Requests.Multa
         public decimal ValorMulta { get; set; }
 
         [Required(ErrorMessage = "Data da infração é obrigatória")]
-        public DateTime DataInfracao { get; set; }
+        public DateTime? DataInfracao { get; set; }
 
         [Required(ErrorMessage = "Local da infração é obrigatório")]
         [MaxLength(150, ErrorMessage = "Local da infração deve conter até 150 caracteres")]
