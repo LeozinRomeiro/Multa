@@ -43,7 +43,7 @@ jobs:
         run: ls -R
 
       - name: Publish .NET
-        run: dotnet publish Multa.Web/Multa.Web.csproj -c:Release -o docs --nologo
+        run: dotnet publish Multa.Web/Multa.Web.csproj -c:Release -o docs --nologo -p:StaticWebAssetBasePath=Multa
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
