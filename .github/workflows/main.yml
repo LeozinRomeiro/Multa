@@ -49,6 +49,9 @@ jobs:
       - name: Replace base href for GitHub Pages
         run: sed -i 's|<base href="/"|<base href="/Multa/"|' Multa.Web/bin/Release/net9.0/publish/wwwroot/Multa/index.html
 
+      - name: Copy index.html to 404.html
+        run: cp Multa.Web/bin/Release/net9.0/publish/wwwroot/Multa/index.html Multa.Web/bin/Release/net9.0/publish/wwwroot/Multa/404.html
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
         with:
