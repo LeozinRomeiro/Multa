@@ -353,7 +353,12 @@ public partial class ListMultasPage : ComponentBase
 
     public async Task OnEditing(long id)
     {
-        NavigationManager.NavigateTo($"/multas/editar/{id}");
+        NavigationManager.NavigateTo($"multas/editar/{id}");
+    }
+
+    public async Task ButtonCreateClick()
+    {
+        NavigationManager.NavigateTo($"multas/adicionar");
     }
 
     public void OnRowClick(DataGridRowClickEventArgs<Core.Models.Multa> args)
