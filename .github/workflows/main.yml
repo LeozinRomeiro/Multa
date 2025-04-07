@@ -47,7 +47,7 @@ jobs:
         run: ls -R Multa.Web/bin/Release/
 
       - name: Replace base href for GitHub Pages
-        run: sed -i 's|<base href="/"|<base href="/Multa/"|' Multa.Web/bin/Release/net9.0/publish/wwwroot/index.html
+        run: sed -i 's|<base href="/"|<base href="/Multa/"|' Multa.Web/bin/Release/net9.0/publish/wwwroot/Multa/index.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -57,7 +57,7 @@ jobs:
       - name: Upload
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'Multa.Web/bin/Release/net9.0/publish/wwwroot'
+          path: 'Multa.Web/bin/Release/net9.0/publish/wwwroot/Multa'
 
       - name: Deploy
         id: deployment
