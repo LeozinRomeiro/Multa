@@ -83,16 +83,17 @@ public partial class CreateMultaPage : ComponentBase
 
         try
         {
-            var result = await MultaHandler.CreateAsync(InputModel);
-            if (result.IsSuccess)
-            {
+            //var result = await MultaHandler.CreateAsync(InputModel);
+
+            //if (result.IsSuccess)
+            //{
                 Snackbar.Add("Multa cadastrada com sucesso", Severity.Success);
                 NavigationManager.NavigateTo("/multas");
-            }
-            else
-            {
-                Snackbar.Add(result.Message, Severity.Error);
-            }
+            //}
+            //else
+            //{
+            //    Snackbar.Add(result.Message, Severity.Error);
+            //}
         }
         catch (Exception ex)
         {
