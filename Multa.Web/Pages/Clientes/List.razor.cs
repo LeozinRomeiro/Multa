@@ -206,7 +206,12 @@ namespace Multa.Web.Pages.Clientes
 
         public async Task OnEditing(long id)
         {
-            NavigationManager.NavigateTo($"/clientes/editar/{id}");
+            NavigationManager.NavigateTo($"clientes/editar/{id}");
+        }
+
+        public async Task ButtonCreateClick()
+        {
+            NavigationManager.NavigateTo($"clientes/adicionar");
         }
 
         public void OnRowClick(DataGridRowClickEventArgs<Cliente> args)
