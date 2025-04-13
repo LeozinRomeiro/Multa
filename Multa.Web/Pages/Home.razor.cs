@@ -4,47 +4,67 @@ using Multa.Core.Handlers;
 using Multa.Core.Models;
 using Multa.Core.Responses;
 
-namespace Multa.Web.Pages.Multas;
-
-public partial class ListMultasPage : ComponentBase
+namespace Multa.Web.Pages
 {
-    #region Properties
-
-    public bool IsBusy { get; set; } = false;
-    public List<Core.Models.Multa> Multas { get; set; } = [];
-    public Core.Models.Multa? MultaSelected = null;
-    public string SearchTerm { get; set; } = string.Empty;
-
-    #endregion
-
-    #region Services
-
-    [Inject]
-    public NavigationManager NavigationManager { get; set; } = null!;
-
-    [Inject]
-    public ISnackbar Snackbar { get; set; } = null!;
-
-    [Inject]
-    public IDialogService DialogService { get; set; } = null!;
-
-    [Inject]
-    public IMultaHandler Handler { get; set; } = null!;
-
-    #endregion
-
-    #region Overrides
-
-    protected override async Task OnInitializedAsync()
+    public class HomePage : ComponentBase
     {
-        IsBusy = true;
-        try
+        #region Properties
+
+        public bool IsBusy { get; set; } = false;
+        public List<Core.Models.Multa> Multas { get; set; } = [];
+        public Core.Models.Multa? MultaSelected = null;
+        public List<(string, string)> Clientes { get; set; } = [];
+        public string ClienteFitted { get; set; }
+        public List<string> Placas { get; set; } = [];
+        public string? PlacaFitted { get; set; }
+        public string SearchTerm { get; set; } = string.Empty;
+
+        #endregion
+
+        #region Services
+
+        [Inject]
+        public NavigationManager NavigationManager { get; set; } = null!;
+
+        [Inject]
+        public ISnackbar Snackbar { get; set; } = null!;
+
+        [Inject]
+        public IMultaHandler Handler { get; set; } = null!;
+
+        #endregion
+
+
+        #region Overrides
+
+        protected override async Task OnInitializedAsync()
         {
-            //var result = await Handler.GetAllAsync();
+            await GetMultasAsync();
+            ClienteFitted = "Todos";
+            Clientes.Add(("Todos", ""));
+            PlacaFitted = "Todas";
+            Placas.Add("Todas");
+        }
 
-            #region Codigo teste fake dados
+        #endregion
 
-            List<Core.Models.Multa> multasFake = new()
+        #region Methods
+
+        public void OnRowClick(DataGridRowClickEventArgs<Core.Models.Multa> args)
+        {
+            NavigationManager.NavigateTo($"multas/editar/{args.Item.Id}");
+        }
+
+        private async Task GetMultasAsync()
+        {
+            IsBusy = true;
+            try
+            {
+                //var result = await Handler.GetAllAsync();
+
+                #region Codigo teste fake dados
+
+                List<Core.Models.Multa> multasFake = new()
             {
                 new()
                 {
@@ -301,91 +321,63 @@ public partial class ListMultasPage : ComponentBase
                 }
             };
 
-            var result = new Response<List<Core.Models.Multa>>(multasFake);
-            #endregion
+                var result = new Response<List<Core.Models.Multa>>(multasFake);
+                #endregion
 
-            if (result.IsSuccess && result.Data is not null)
-                Multas = result.Data;
+                if (result.IsSuccess && result.Data is not null)
+                {
+                    Multas = result.Data.ToList();
+                    Placas = Multas.Select(s => s.PlacaVeiculo).Distinct().ToList();
+                    Clientes = Multas.Select(s => (s.Cliente.Nome, s.Cliente.CPF)).Distinct().ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Snackbar.Add(ex.Message, Severity.Error);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
-        catch (Exception ex)
+
+        public Func<Core.Models.Multa, bool> FilterSearch => multa =>
         {
-            Snackbar.Add(ex.Message, Severity.Error);
-        }
-        finally
+            if (string.IsNullOrWhiteSpace(SearchTerm))
+                return true;
+
+            return multa.AutoInfracao.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)
+                || multa.PlacaVeiculo.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)
+                || multa.CodigoInfracao.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)
+                || multa.DescricaoInfracao.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)
+                || multa.Renavam.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)
+                || multa.Cliente.Nome.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)
+                || multa.CodigoInfracao.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase);
+        };
+
+        public async Task FilterPlaca(string placa)
         {
-            IsBusy = false;
+            PlacaFitted = placa;
+            await Filter();
         }
-    }
 
-    #endregion
-
-    #region Methods
-
-    public async Task OnDeleteButtonClickedAsync(long id, string autoInfracao)
-    {
-        var result = await DialogService.ShowMessageBox(
-            "ATENÇÃO",
-            $"Deseja realmente excluir a multa {autoInfracao}? Esta ação não poderá ser desfeita!",
-            yesText: "EXCLUIR",
-            cancelText: "Cancelar");
-
-        if (result is true)
-            await OnDeleteAsync(id);
-    }
-
-    public async Task OnDeleteAsync(long id)
-    {
-        try
+        public async Task FilterCliente(string cpf)
         {
-            //await Handler.DeleteAsync(id);
-            //Multas.RemoveAll(x => x.Id == id);
-
-            Snackbar.Add($"Multa excluída com sucesso", Severity.Success);
+            ClienteFitted = cpf;
+            await Filter();
         }
-        catch (Exception ex)
+
+        public async Task Filter()
         {
-            Snackbar.Add(ex.Message, Severity.Error);
+            await GetMultasAsync();
+
+            if (PlacaFitted != "Todas")
+                Multas = Multas.Where(w => w.PlacaVeiculo == PlacaFitted).ToList();
+
+            if (!string.IsNullOrEmpty(ClienteFitted))
+                Multas = Multas.Where(w => w.Cliente.CPF == ClienteFitted).ToList();
         }
+
+        #endregion
     }
-
-    public async Task OnEditing(long id)
-    {
-        NavigationManager.NavigateTo($"multas/editar/{id}");
-    }
-
-    public async Task ButtonCreateClick()
-    {
-        NavigationManager.NavigateTo($"multas/adicionar");
-    }
-
-    public void OnRowClick(DataGridRowClickEventArgs<Core.Models.Multa> args)
-    {
-        if (MultaSelected != args.Item)
-            MultaSelected = args.Item;
-        else
-            MultaSelected = null;
-    }
-
-    public string AlterColorSelect(Core.Models.Multa multa, int rowIndex)
-    {
-        return multa == MultaSelected
-            ? $"background-color: var(--mud-palette-primary); "
-            : "";
-    }
-
-    public Func<Core.Models.Multa, bool> Filter => multa =>
-    {
-        if (string.IsNullOrWhiteSpace(SearchTerm))
-            return true;
-
-        return multa.AutoInfracao.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)
-            || multa.PlacaVeiculo.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)
-            || multa.CodigoInfracao.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)
-            || multa.DescricaoInfracao.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)
-            || multa.Renavam.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)
-            || multa.Cliente.Nome.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)
-            || multa.CodigoInfracao.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase);
-    };
-
-    #endregion
 }
