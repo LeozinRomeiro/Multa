@@ -57,7 +57,7 @@
         }
         else
         {
-            <MudText>Selecione uma multa para editar ou excluir</MudText>
+            <MudText>Click na multa para ter mais detalhes</MudText>
         }
 
         <MudSpacer />
@@ -77,7 +77,7 @@
         <PropertyColumn Property="x => x.DescricaoInfracao" Title="Descrição" />
         <PropertyColumn Property="x => x.ValorMulta" Title="Valor (R$)" />
         <PropertyColumn Property="x => x.DataInfracao" Title="Data da inflação" Format="dd-MM-yy hh:mm" />
-        <PropertyColumn Property="x => x.DataInfracao" Title="Data de vencimento" Format="dd-MM-yy" InitialDirection="SortDirection.Descending" />
+        <PropertyColumn Property="x => x.Vencimento" Title="Data de vencimento" Format="dd-MM-yy" InitialDirection="SortDirection.Descending" />
         <PropertyColumn Property="x => x.Cliente.Nome" Title="Cliente" />
     </Columns>
 </MudDataGrid>

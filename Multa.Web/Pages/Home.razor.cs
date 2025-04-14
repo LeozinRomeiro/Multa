@@ -41,9 +41,7 @@ namespace Multa.Web.Pages
         {
             await GetMultasAsync();
             ClienteFitted = "Todos";
-            Clientes.Add(("Todos", ""));
             PlacaFitted = "Todas";
-            Placas.Add("Todas");
         }
 
         #endregion
@@ -76,6 +74,7 @@ namespace Multa.Web.Pages
                     DescricaoInfracao = "Avanço de sinal vermelho",
                     ValorMulta = 293.47m,
                     DataInfracao = DateTime.Now.AddDays(-10),
+                    Vencimento = DateTime.Now.AddDays(+1),
                     LocalInfracao = "Av. Brasil, 1000 - Centro",
                     OrgaoAutuador = "DETRAN-SP",
                     PontosNaCNH = 7,
@@ -101,6 +100,8 @@ namespace Multa.Web.Pages
                     DescricaoInfracao = "Ultrapassagem em local proibido",
                     ValorMulta = 880.41m,
                     DataInfracao = DateTime.Now.AddDays(-20),
+                    Vencimento = DateTime.Now.AddDays(+18),
+
                     LocalInfracao = "Rod. dos Imigrantes, km 45",
                     OrgaoAutuador = "PRF",
                     PontosNaCNH = 7,
@@ -126,6 +127,8 @@ namespace Multa.Web.Pages
                     DescricaoInfracao = "Estacionamento em local proibido",
                     ValorMulta = 195.23m,
                     DataInfracao = DateTime.Now.AddDays(-5),
+                    Vencimento = DateTime.Now.AddDays(+16),
+
                     LocalInfracao = "Rua das Flores, 200 - Jardim",
                     OrgaoAutuador = "CET-SP",
                     PontosNaCNH = 3,
@@ -151,6 +154,8 @@ namespace Multa.Web.Pages
                     DescricaoInfracao = "Excesso de velocidade - até 20%",
                     ValorMulta = 130.16m,
                     DataInfracao = DateTime.Now.AddDays(-15),
+                    Vencimento = DateTime.Now.AddDays(+6),
+
                     LocalInfracao = "Av. João XXIII, 580",
                     OrgaoAutuador = "SMT-BH",
                     PontosNaCNH = 4,
@@ -176,6 +181,8 @@ namespace Multa.Web.Pages
                     DescricaoInfracao = "Conduzir veículo sem CNH",
                     ValorMulta = 880.41m,
                     DataInfracao = DateTime.Now.AddDays(-30),
+                    Vencimento = DateTime.Now.AddDays(+26),
+
                     LocalInfracao = "Rua Principal, 321 - Centro",
                     OrgaoAutuador = "DETRAN-PR",
                     PontosNaCNH = 0,
@@ -201,6 +208,8 @@ namespace Multa.Web.Pages
                     DescricaoInfracao = "Não uso do cinto de segurança",
                     ValorMulta = 195.23m,
                     DataInfracao = DateTime.Now.AddDays(-7),
+                    Vencimento = DateTime.Now.AddDays(0),
+
                     LocalInfracao = "Av. Independência, 99",
                     OrgaoAutuador = "CET-RJ",
                     PontosNaCNH = 5,
@@ -226,6 +235,8 @@ namespace Multa.Web.Pages
                     DescricaoInfracao = "Veículo com farol apagado à noite",
                     ValorMulta = 130.16m,
                     DataInfracao = DateTime.Now.AddDays(-3),
+                    Vencimento = DateTime.Now.AddDays(7),
+
                     LocalInfracao = "Av. das Nações, 1100",
                     OrgaoAutuador = "DETRAN-MG",
                     PontosNaCNH = 4,
@@ -251,6 +262,8 @@ namespace Multa.Web.Pages
                     DescricaoInfracao = "Dirigir utilizando celular",
                     ValorMulta = 293.47m,
                     DataInfracao = DateTime.Now.AddDays(-12),
+                    Vencimento = DateTime.Now.AddDays(33),
+
                     LocalInfracao = "Rua Tiradentes, 60",
                     OrgaoAutuador = "SMTT",
                     PontosNaCNH = 7,
@@ -277,6 +290,8 @@ namespace Multa.Web.Pages
                     DescricaoInfracao = "Avanço de faixa de pedestres",
                     ValorMulta = 195.23m,
                     DataInfracao = DateTime.Now.AddDays(-18),
+                    Vencimento = DateTime.Now.AddDays(3),
+
                     LocalInfracao = "Av. Paulista, 1500",
                     OrgaoAutuador = "CET-SP",
                     PontosNaCNH = 4,
@@ -303,6 +318,8 @@ namespace Multa.Web.Pages
                     DescricaoInfracao = "Não respeitar parada obrigatória",
                     ValorMulta = 293.47m,
                     DataInfracao = DateTime.Now.AddDays(-25),
+                    Vencimento = DateTime.Now.AddDays(7),
+
                     LocalInfracao = "Rua São João, 808",
                     OrgaoAutuador = "DETRAN-RS",
                     PontosNaCNH = 7,
@@ -326,9 +343,11 @@ namespace Multa.Web.Pages
 
                 if (result.IsSuccess && result.Data is not null)
                 {
-                    Multas = result.Data.ToList();
+                    Multas = result.Data.OrderByDescending(m => m.Vencimento).ToList();
                     Placas = Multas.Select(s => s.PlacaVeiculo).Distinct().ToList();
                     Clientes = Multas.Select(s => (s.Cliente.Nome, s.Cliente.CPF)).Distinct().ToList();
+                    Clientes.Add(("Todos", ""));
+                    Placas.Add("Todas");
                 }
             }
             catch (Exception ex)
@@ -374,7 +393,7 @@ namespace Multa.Web.Pages
             if (PlacaFitted != "Todas")
                 Multas = Multas.Where(w => w.PlacaVeiculo == PlacaFitted).ToList();
 
-            if (!string.IsNullOrEmpty(ClienteFitted))
+            if (!string.IsNullOrEmpty(ClienteFitted) && ClienteFitted != "Todos")
                 Multas = Multas.Where(w => w.Cliente.CPF == ClienteFitted).ToList();
         }
 
