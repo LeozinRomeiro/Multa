@@ -1,5 +1,83 @@
 ﻿@page "/"
+@inherits HomePage
 
 <PageTitle>Pagina Inicial</PageTitle>
 
-<h1>Pagina Inicial -> Listar multa com vencimento mais preve</h1>
+<div class="d-flex justify-end mt-4 mb-4">
+    <MudSelect T="string"
+               Label="Placa"
+               Value="PlacaFitted"
+               ValueChanged="FilterPlaca"
+               AnchorOrigin="Origin.BottomCenter"
+               Class="mr-4">
+        @foreach (var placa in Placas)
+        {
+            <MudSelectItem T="string" Value="@placa">
+                @placa
+            </MudSelectItem>
+        }
+    </MudSelect>
+    <MudSelect T="string"
+               Label="Cliente"
+               Value="ClienteFitted"
+               ValueChanged="FilterCliente"
+               AnchorOrigin="Origin.BottomCenter"
+               Class="mr-4">
+        @foreach (var cliente in Clientes)
+        {
+            <MudSelectItem T="string" Value="@cliente.Item2">
+                @cliente.Item1
+            </MudSelectItem>
+        }
+    </MudSelect>
+    <MudSpacer />
+@*     <MudButton Size="Size.Small"
+               Variant="Variant.Filled"
+               Color="Color.Primary"
+               StartIcon="@Icons.Material.TwoTone.Search"
+               OnClick="OnSearchAsync">
+        PESQUISAR
+    </MudButton>
+ *@
+</div>
+
+<MudDataGrid T="Core.Models.Multa"
+             Class="mt-4"
+             Items="@Multas"
+             QuickFilter="FilterSearch"
+             Filterable="false"
+             Hideable="true"
+             MultiSelection="false"
+             SelectedItem="MultaSelected"
+             RowClick="OnRowClick">
+
+    <ToolBarContent>
+        @if (MultaSelected is not null)
+        {
+        }
+        else
+        {
+            <MudText>Selecione uma multa para editar ou excluir</MudText>
+        }
+
+        <MudSpacer />
+        <MudTextField @bind-Value="SearchTerm"
+                      Placeholder="Filtrar..."
+                      Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Search"
+                      Class="mt-0"
+                      Immediate="true" />
+    </ToolBarContent>
+
+    <Columns>
+        @* <PropertyColumn Property="x => x.Id" Title="#" /> *@
+        <PropertyColumn Property="x => x.AutoInfracao" Title="Auto de Infração" />
+        <PropertyColumn Property="x => x.PlacaVeiculo" Title="Placa" />
+        <PropertyColumn Property="x => x.CodigoInfracao" Title="Código" />
+        <PropertyColumn Property="x => x.DescricaoInfracao" Title="Descrição" />
+        <PropertyColumn Property="x => x.ValorMulta" Title="Valor (R$)" />
+        <PropertyColumn Property="x => x.DataInfracao" Title="Data da inflação" Format="dd-MM-yy hh:mm" />
+        <PropertyColumn Property="x => x.DataInfracao" Title="Data de vencimento" Format="dd-MM-yy" InitialDirection="SortDirection.Descending" />
+        <PropertyColumn Property="x => x.Cliente.Nome" Title="Cliente" />
+    </Columns>
+</MudDataGrid>

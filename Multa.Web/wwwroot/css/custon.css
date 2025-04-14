@@ -16,3 +16,7 @@
 tr[style*="background-color: var(--mud-palette-primary)"] td {
     color: var(--mud-palette-primary-text) !important;
 }
+
+.loading-progress circle:last-child {
+    stroke: #FFF700;
+}
