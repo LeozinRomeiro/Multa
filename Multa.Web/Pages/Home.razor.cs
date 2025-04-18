@@ -373,6 +373,14 @@ namespace Multa.Web.Pages
                 || multa.CodigoInfracao.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase);
         };
 
+        public static Func<Core.Models.Multa, int, string> RowStyleFunc => (x, i) =>
+        {
+            if (x.Vencimento.Date == DateTime.Now.Date)
+                return "background-color:red";
+
+            return "";
+        };
+
         public async Task FilterPlaca(string placa)
         {
             PlacaFitted = placa;
