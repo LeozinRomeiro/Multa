@@ -15,8 +15,8 @@
 else
 {
     <MudPaper Class="pa-8 mt-4">
-        <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
-            <DataAnnotationsValidator />
+       <Form Model="@InputModel" OnValidSubmit="@OnValidSubmitAsync">
+
 
             <div class="d-flex flex-wrap" style="gap: 1rem;">
                 <MudTextField Label="Auto de Infração" Style="min-width: 250px;"
@@ -50,13 +50,6 @@ else
                 <MudNumericField T="int" Label="Pontos na CNH" Style="max-width: 50px;"
                                  @bind-Value="InputModel.PontosNaCNH" />
             </div>
-
-            <MudButton Class="mt-5" ButtonType="ButtonType.Submit"
-                       Variant="Variant.Filled"
-                       Color="Color.Primary"
-                       Disabled="IsBusy">
-                Salvar
-            </MudButton>
-        </EditForm>
+        </Form>
     </MudPaper>
 }

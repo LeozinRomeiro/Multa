@@ -12,7 +12,6 @@ namespace Multa.Web.Pages
 
         public bool IsBusy { get; set; } = false;
         public List<Core.Models.Multa> Multas { get; set; } = [];
-        public Core.Models.Multa? MultaSelected = null;
         public List<(string, string)> Clientes { get; set; } = [];
         public string ClienteFitted { get; set; }
         public List<string> Placas { get; set; } = [];
@@ -343,7 +342,7 @@ namespace Multa.Web.Pages
 
                 if (result.IsSuccess && result.Data is not null)
                 {
-                    Multas = result.Data.OrderByDescending(m => m.Vencimento).ToList();
+                    Multas = result.Data.OrderBy(m => m.Vencimento).ToList();
                     Placas = Multas.Select(s => s.PlacaVeiculo).Distinct().ToList();
                     Clientes = Multas.Select(s => (s.Cliente.Nome, s.Cliente.CPF)).Distinct().ToList();
                     Clientes.Add(("Todos", ""));
