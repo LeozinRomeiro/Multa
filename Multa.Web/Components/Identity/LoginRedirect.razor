@@ -1,0 +1,14 @@
+﻿@inject NavigationManager NavigationManager
+@inject ISnackbar Snackbar
+
+<h3>Redirecionando para o login...</h3>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        Snackbar.Add("Direcionando ao login para autorizar acesso");
+        NavigationManager.NavigateTo("/login");
+    }
+
+}

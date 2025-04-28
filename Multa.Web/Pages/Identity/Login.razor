@@ -1,6 +1,7 @@
 ﻿@page "/login"
 @using System.ComponentModel.DataAnnotations
 @layout LoginLayout
+@inherits LoginPage
 
 <PageTitle>Entrar</PageTitle>
 
@@ -11,39 +12,38 @@
             <div class="d-flex justify-center">
                 <img src="imgs/multa-logo-1024Por500.PNG" alt="logo principal" width="250" />
             </div>
-            Informe suas credenciais de acesso
-            <MudForm @ref="_mudForm">
-                <MudTextField 
-                    T="string" 
-                    Label="E-mail" 
-                    InputType="InputType.Email" 
-                    Required="true" 
-                    RequiredError="Informe o E-mail" 
-                    Validation="@(new EmailAddressAttribute{ ErrorMessage = "E-mail invalido" })">   
-                </MudTextField>
-                <MudTextField
-                    T = "string" 
-                    Label="Senha" 
-                    InputType="InputType.Password" 
-                    Required="true" 
-                    RequiredError="Senha invalida">
+            <EditForm Model="InputModel" OnValidSubmit="OnValidSubmitAsync">
+                <MudTextField T="string"
+                              Label="E-mail"
+                              HelperText="Campo obrigatório"
+                              InputType="InputType.Email"
+                              For="@(() => InputModel.Email)"
+                              @bind-Value="InputModel.Email" />
 
-                </MudTextField>
-            </MudForm>
+                <MudTextField T="string"
+                              Label="Senha"
+                              HelperText="Campo obrigatório"
+                              InputType="InputType.Password"
+                              For="@(() => InputModel.Password)"
+                              @bind-Value="InputModel.Password" />
+            </EditForm>
 
             <div class="d-flex mt-8">
-                <MudButton Variant="Variant.Filled" Color="Color.Primary">
-                    Entrar
-                </MudButton>
-                <MudSpacer></MudSpacer>
-                <MudButton Href="/esqueci" Variant="Variant.Filled" Color="Color.Dark">
-                    Esqueci a senha
-                </MudButton>
+                @if (IsBusy)
+                {
+                    <MudProgressCircular Color="Color.Info" Indeterminate="true" />
+                }
+                else
+                {
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">
+                        Entrar
+                    </MudButton>
+                    <MudSpacer></MudSpacer>
+                    <MudButton Href="/esqueci" Variant="Variant.Filled" Color="Color.Dark">
+                        Esqueci a senha
+                    </MudButton>
+                }
             </div>
         </MudPaper>
     </MudItem>
 </MudGrid>
-
-@code {
-    MudForm _mudForm = new();
-}
