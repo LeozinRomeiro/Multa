@@ -12,7 +12,8 @@ namespace Multa.Web.Security
     {
         private bool _isAuthenticated = false;
         private readonly HttpClient _client = clientFactory.CreateClient(Configuration.HttpClientName);
-
+        public bool Authentication = false;
+        
         public async Task<bool> CheckAuthenticatedAsync()
         {
             await GetAuthenticationStateAsync();
@@ -27,14 +28,9 @@ namespace Multa.Web.Security
             _isAuthenticated = false;
             var user = new ClaimsPrincipal(new ClaimsIdentity());
 
-            //var userInfo = await GetUser();
-            //if (userInfo is null)
-            //    return new AuthenticationState(user);
-
-            var userInfo = new User
-            {
-                Email = "jp@gmail.com"
-            };
+            var userInfo = await GetUser();
+            if (userInfo is null)
+                return new AuthenticationState(user);
 
             var claims = await GetClaims(userInfo);
 
@@ -49,7 +45,17 @@ namespace Multa.Web.Security
         {
             try
             {
-                return await _client.GetFromJsonAsync<User?>("v1/identity/manage/info");
+                //return await _client.GetFromJsonAsync<User?>("v1/identity/manage/info");
+
+                if (Authentication)
+                {
+                    return new User
+                    {
+                        Email = "jp@gmail.com"
+                    };
+                }
+
+                return null;
             }
             catch
             {
@@ -88,6 +94,11 @@ namespace Multa.Web.Security
                     claims.Add(new Claim(role.Type, role.Value, role.ValueType, role.Issuer, role.OriginalIssuer));
 
             return claims;
+        }
+
+        public async Task SetAuthentication()
+        {
+            Authentication = true;
         }
     }
 }

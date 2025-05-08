@@ -56,9 +56,14 @@ namespace Multa.Web.Pages.Identity
 
                 if (result.IsSuccess)
                 {
-                    await AuthenticationStateProvider.GetAuthenticationStateAsync();
-                    AuthenticationStateProvider.NotifyAuthenticationStateChanged();
-                    NavigationManager.NavigateTo("/");
+                    Task SetEstado = AuthenticationStateProvider.SetAuthentication();
+                    await SetEstado;
+                    if (SetEstado.IsCompleted)
+                    {
+                        await AuthenticationStateProvider.GetAuthenticationStateAsync();
+                        AuthenticationStateProvider.NotifyAuthenticationStateChanged();
+                        NavigationManager.NavigateTo("/");
+                    }
                 }
                 else
                     Snackbar.Add(result.Message, Severity.Error);

@@ -26,24 +26,24 @@
                               InputType="InputType.Password"
                               For="@(() => InputModel.Password)"
                               @bind-Value="InputModel.Password" />
+                <div class="d-flex mt-8">
+                    @if (IsBusy)
+                    {
+                        <MudProgressCircular Color="Color.Info" Indeterminate="true" />
+                    }
+                    else
+                    {
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">
+                            Entrar
+                        </MudButton>
+                        <MudSpacer></MudSpacer>
+                        <MudButton Href="/esqueci" Variant="Variant.Filled" Color="Color.Dark">
+                            Esqueci a senha
+                        </MudButton>
+                    }
+                </div>
             </EditForm>
 
-            <div class="d-flex mt-8">
-                @if (IsBusy)
-                {
-                    <MudProgressCircular Color="Color.Info" Indeterminate="true" />
-                }
-                else
-                {
-                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">
-                        Entrar
-                    </MudButton>
-                    <MudSpacer></MudSpacer>
-                    <MudButton Href="/esqueci" Variant="Variant.Filled" Color="Color.Dark">
-                        Esqueci a senha
-                    </MudButton>
-                }
-            </div>
         </MudPaper>
     </MudItem>
 </MudGrid>

@@ -17,7 +17,7 @@ namespace Multa.Web.Handlers
             //    ? new Response<string>("Login realizado com sucesso!", 200, "Login realizado com sucesso!")
             //    : new Response<string>(null, 400, "Não foi possível realizar o login");
 
-            var valido = request.UserId == "jp" && request.Password == "";
+            var valido = request.Email == "jp@gmail.com" && request.Password == "";
 
             return valido
                 ? new Response<string>("Login realizado com sucesso!", 200, "Login realizado com sucesso!")
