@@ -6,33 +6,42 @@
 <MudDialogProvider />
 <MudPopoverProvider />
 
-<MudLayout>
-    <MudAppBar>
-        <MudIconButton Icon="@Icons.Material.Filled.Menu"
-                       Color="Color.Inherit"
-                       Edge="Edge.Start"
-                       OnClick="ToggleDrawer" />
-        <MudSpacer />
-        @* <MudButton Href="/lancamentos/novo"
+
+<AuthorizeView>
+    <Authorized>
+        <MudLayout>
+            <MudAppBar>
+                <MudIconButton Icon="@Icons.Material.Filled.Menu"
+                               Color="Color.Inherit"
+                               Edge="Edge.Start"
+                               OnClick="ToggleDrawer" />
+                <MudSpacer />
+                @* <MudButton Href="/lancamentos/novo"
                    Variant="Variant.Text" StartIcon="@Icons.Material.TwoTone.Add">
             NOVO LANÇAMENTO
         </MudButton> *@
-        <MudSpacer/>
-        <MudSwitch Color="Color.Inherit"
-                   @bind-Value="@_isDarkMode"
-                   T="bool"
-                   Class="ma-4"
-                   ThumbIcon="@Icons.Material.TwoTone.Lightbulb" />
-    </MudAppBar>
-    <MudDrawer @bind-Open=@_isDrawerOpen>
-        <NavMenu />
-    </MudDrawer>
-    <MudMainContent>
-        <MudContainer Class="mt-4">
-            @Body
-        </MudContainer>
-    </MudMainContent>
-</MudLayout>
+                <MudSpacer />
+                <MudSwitch Color="Color.Inherit"
+                           @bind-Value="@_isDarkMode"
+                           T="bool"
+                           Class="ma-4"
+                           ThumbIcon="@Icons.Material.TwoTone.Lightbulb" />
+            </MudAppBar>
+            <MudDrawer @bind-Open=@_isDrawerOpen>
+                <NavMenu />
+            </MudDrawer>
+            <MudMainContent>
+                <MudContainer Class="mt-4">
+                    @Body
+                </MudContainer>
+            </MudMainContent>
+        </MudLayout>
+
+    </Authorized>
+    <NotAuthorized>
+        <LoginRedirect></LoginRedirect>
+    </NotAuthorized>
+</AuthorizeView>
 
 @code{
     private bool _isDarkMode = true;
@@ -43,8 +52,8 @@
     {
         if (firstRender)
         {
-            _isDarkMode = await _mudThemeProvider.GetSystemPreference();
-            await _mudThemeProvider.WatchSystemPreference(OnSystemPreferenceChanged);
+            //_isDarkMode = await _mudThemeProvider.GetSystemPreference();
+            //await _mudThemeProvider.WatchSystemPreference(OnSystemPreferenceChanged);
             StateHasChanged();
         }
     }

@@ -4,8 +4,8 @@
 <MudText Typo="Typo.h3">Nova Multa</MudText>
 
 <MudPaper Class="pa-8 mt-4">
-    <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
-        <DataAnnotationsValidator />
+
+    <Form Model="@InputModel" OnValidSubmit="@OnValidSubmitAsync">
 
         <div class="d-flex flex-wrap" style="gap: 1rem;">
 
@@ -61,12 +61,5 @@
                 }
             </MudSelect>
         </div>
-
-        <MudButton Class="mt-5" ButtonType="ButtonType.Submit"
-                   Variant="Variant.Filled"
-                   Color="Color.Primary"
-                   Disabled="IsBusy">
-            Salvar
-        </MudButton>
-    </EditForm>
+    </Form>
 </MudPaper>

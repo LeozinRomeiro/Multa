@@ -8,7 +8,7 @@
                Label="Placa"
                Value="PlacaFitted"
                ValueChanged="FilterPlaca"
-               AnchorOrigin="Origin.BottomCenter"
+               AnchorOrigin="Origin.BottomLeft"
                Class="mr-4">
         @foreach (var placa in Placas)
         {
@@ -21,7 +21,7 @@
                Label="Cliente"
                Value="ClienteFitted"
                ValueChanged="FilterCliente"
-               AnchorOrigin="Origin.BottomCenter"
+               AnchorOrigin="Origin.BottomLeft"
                Class="mr-4">
         @foreach (var cliente in Clientes)
         {
@@ -48,17 +48,11 @@
              Filterable="false"
              Hideable="true"
              MultiSelection="false"
-             SelectedItem="MultaSelected"
-             RowClick="OnRowClick">
+             RowClick="OnRowClick"
+             RowStyleFunc="RowStyleFunc">
 
     <ToolBarContent>
-        @if (MultaSelected is not null)
-        {
-        }
-        else
-        {
-            <MudText>Click na multa para ter mais detalhes</MudText>
-        }
+        <MudText>Click na multa para ter mais detalhes</MudText>
 
         <MudSpacer />
         <MudTextField @bind-Value="SearchTerm"
@@ -77,7 +71,7 @@
         <PropertyColumn Property="x => x.DescricaoInfracao" Title="Descrição" />
         <PropertyColumn Property="x => x.ValorMulta" Title="Valor (R$)" />
         <PropertyColumn Property="x => x.DataInfracao" Title="Data da inflação" Format="dd-MM-yy hh:mm" />
-        <PropertyColumn Property="x => x.Vencimento" Title="Data de vencimento" Format="dd-MM-yy" InitialDirection="SortDirection.Descending" />
+        <PropertyColumn Property="x => x.Vencimento" Title="Data de vencimento" Format="dd-MM-yy" InitialDirection="SortDirection.Ascending" />
         <PropertyColumn Property="x => x.Cliente.Nome" Title="Cliente" />
     </Columns>
 </MudDataGrid>

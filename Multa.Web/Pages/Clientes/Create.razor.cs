@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using Multa.Core.Handlers;
+using Multa.Core.Models;
 using Multa.Core.Requests.Cliente;
+using Multa.Core.Responses;
 
 namespace Multa.Web.Pages.Clientes
 {
@@ -35,10 +37,14 @@ namespace Multa.Web.Pages.Clientes
 
             try
             {
-                var result = await Handler.CreateAsync(InputModel);
+                //var result = await Handler.CreateAsync(InputModel);
+
+                var result = new Response<Cliente>();
+
                 if (result.IsSuccess)
                 {
-                    Snackbar.Add(result.Message, Severity.Success);
+                    //Snackbar.Add(result.Message, Severity.Success);
+                    Snackbar.Add($"O cliente {InputModel.Nome} cadastrado com sucesso", Severity.Success);
                     NavigationManager.NavigateTo("/clientes");
                 }
                 else

@@ -33,6 +33,7 @@ namespace Multa.Web
             {
                 Primary = "#FFF700",
                 Secondary = "#FFFFE0",
+                SecondaryContrastText = Colors.Shades.Black,
                 Tertiary = Colors.Shades.White,
                 // Background = Colors.LightGreen.Darken4,
                 AppbarBackground = new MudColor("#FFF700"),

@@ -20,3 +20,21 @@ tr[style*="background-color: var(--mud-palette-primary)"] td {
 .loading-progress circle:last-child {
     stroke: #FFF700;
 }
+
+/*Imagem de fundo num container*/
+.login-container {
+    background-image: url('/imgs/backgroud-transito.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*div embaçada*/
+.embacado {
+    background-color: transparent;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+}

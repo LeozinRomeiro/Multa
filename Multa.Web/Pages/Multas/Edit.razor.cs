@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using Multa.Core.Handlers;
+using Multa.Core.Models;
 using Multa.Core.Requests.Multa;
 using Multa.Core.Responses;
 
@@ -91,7 +92,10 @@ public partial class EditMultaPage : ComponentBase
 
         try
         {
-            var result = await Handler.UpdateAsync(InputModel);
+            //var result = await Handler.UpdateAsync(InputModel);
+
+            var result = new Response<Core.Models.Multa>();
+
             if (result.IsSuccess)
             {
                 Snackbar.Add("Multa atualizada com sucesso", Severity.Success);
