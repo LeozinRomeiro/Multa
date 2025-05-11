@@ -23,7 +23,7 @@ tr[style*="background-color: var(--mud-palette-primary)"] td {
 
 /*Imagem de fundo num container*/
 .login-container {
-    background-image: url('/imgs/backgroud-transito.jpg');
+    background-image: url('imgs/backgroud-transito.jpg');
     background-size: cover;
     background-position: center;
     min-height: 100vh;
