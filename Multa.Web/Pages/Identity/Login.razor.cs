@@ -62,7 +62,7 @@ namespace Multa.Web.Pages.Identity
                     {
                         await AuthenticationStateProvider.GetAuthenticationStateAsync();
                         AuthenticationStateProvider.NotifyAuthenticationStateChanged();
-                        NavigationManager.NavigateTo("/");
+                        NavigationManager.NavigateTo(NavigationManager.BaseUri);
                     }
                 }
                 else
