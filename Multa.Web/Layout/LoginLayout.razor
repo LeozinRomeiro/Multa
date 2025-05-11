@@ -1,9 +1,10 @@
 ﻿@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
 
 <MudThemeProvider Theme="Configuration.Theme"/>
 <MudSnackbarProvider/>
 
-<MudLayout Class="login-container" Style="background-image: url('/imgs/backgroud-transito.jpg')">
+<MudLayout Class="login-container" Style=@String.Concat("background-image: ", $"url({NavigationManager.BaseUri}imgs/backgroud-transito.jpg)")>
     <MudMainContent>
         <MudContainer>
             @Body
