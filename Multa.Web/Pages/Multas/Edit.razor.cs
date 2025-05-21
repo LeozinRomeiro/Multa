@@ -99,7 +99,7 @@ public partial class EditMultaPage : ComponentBase
             if (result.IsSuccess)
             {
                 Snackbar.Add("Multa atualizada com sucesso", Severity.Success);
-                NavigationManager.NavigateTo("/multas");
+                NavigationManager.NavigateTo(NavigationManager.BaseUri + "multas");
             }
             else
             {
