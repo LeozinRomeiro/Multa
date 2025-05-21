@@ -45,7 +45,7 @@ namespace Multa.Web.Pages.Clientes
                 {
                     //Snackbar.Add(result.Message, Severity.Success);
                     Snackbar.Add($"O cliente {InputModel.Nome} cadastrado com sucesso", Severity.Success);
-                    NavigationManager.NavigateTo("/clientes");
+                    NavigationManager.NavigateTo(NavigationManager.BaseUri + "clientes");
                 }
                 else
                 {

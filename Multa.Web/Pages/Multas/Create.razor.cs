@@ -88,7 +88,7 @@ public partial class CreateMultaPage : ComponentBase
             //if (result.IsSuccess)
             //{
                 Snackbar.Add($"Multa {InputModel.CodigoInfracao} cadastrada com sucesso", Severity.Success);
-                NavigationManager.NavigateTo("/multas");
+                NavigationManager.NavigateTo(NavigationManager.BaseUri + "multas");
             //}
             //else
             //{

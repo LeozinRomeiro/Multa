@@ -113,7 +113,7 @@ public partial class EditClientePage : ComponentBase
             if (result.IsSuccess)
             {
                 Snackbar.Add("Cliente atualizado com sucesso", Severity.Success);
-                NavigationManager.NavigateTo("/clientes");
+                NavigationManager.NavigateTo(NavigationManager.BaseUri + "clientes");
             }
             else
             {
